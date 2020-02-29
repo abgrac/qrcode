@@ -4,7 +4,10 @@
 import os
 from MyQR.mylibs import theqrmodule
 from PIL import Image
-   
+
+resFac = 1
+upFilter = Image.NEAREST
+
 # Positional parameters
 #   words: str
 #
@@ -82,7 +85,7 @@ def run(words, version=1, level='H', picture=None, colorized=False, contrast=1.0
                     qr.putpixel((i+12,j+12), bg.getpixel((i,j)))
         
         qr_name = os.path.join(save_dir, os.path.splitext(os.path.basename(bg_name))[0] + '_qrcode.png') if not save_name else os.path.join(save_dir, save_name)
-        qr.resize((qr.size[0]*3, qr.size[1]*3)).save(qr_name)
+        qr.resize((qr.size[0]*resFac, qr.size[1]*resFac), upFilter).save(qr_name)
         return qr_name
 
     tempdir = os.path.join(os.path.expanduser('~'), '.myqr')
@@ -120,7 +123,7 @@ def run(words, version=1, level='H', picture=None, colorized=False, contrast=1.0
         elif qr_name:
             qr = Image.open(qr_name)
             qr_name = os.path.join(save_dir, os.path.basename(qr_name)) if not save_name else os.path.join(save_dir, save_name)
-            qr.resize((qr.size[0]*3, qr.size[1]*3)).save(qr_name)
+            qr.resize((qr.size[0]*resFac, qr.size[1]*resFac), upFilter).save(qr_name)
           
         return ver, level, qr_name
         
