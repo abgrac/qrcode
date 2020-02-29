@@ -1,0 +1,1 @@
+* .\myqr.py AdrianoBini.com -v 6 -l H -c -con 1.2 -bri 1.0 -p '0.jpg' -n qr.png -d D:\bini\qrcode
